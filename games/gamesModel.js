@@ -6,6 +6,7 @@ module.exports = {
   remove,
   getAll,
   findById,
+  findBy
 }
 
 function insert(game) {
@@ -47,4 +48,9 @@ function insert(game) {
     .first()
   }
   
+  function findBy(filter) {
+      return db('games')
+      .where({filter})
+      .first()
+  }
   

@@ -15,8 +15,8 @@ router.get('/', (req, res) => {
 router.post('/', validateData, (req, res) => {
     const game = req.body
     Games.insert(game)
-    .then(res => {
-        res.status(201).json(res)
+    .then(response => {
+        res.status(201).json(response)
     })
     .catch(error=> {
         res.status(500).json(error.message)
