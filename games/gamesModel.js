@@ -50,7 +50,7 @@ function insert(game) {
   
   function findBy(filter) {
       return db('games')
-      .where({filter})
-      .first()
+      .where(filter)
+      
   }
   

@@ -8,33 +8,31 @@ describe('router', () => {
         await db('users').truncate();
     })
 
-    it('respond with 200 - get - all games', async () => {
+    it('should respond with 200 - get - all games', async () => {
         const response = await supertest(router).get('/')
         expect(response.status).toEqual(200)
     })
 
-    it('respond with a json object - get - all games', async () => {
+    it('should respond with a json object - get - all games', async () => {
         await supertest(router)
         .get('/api/games')
         .expect('Content-Type', /json/i)
     })
 
-    it('respond with an array - get - all games', async() => {
+    it('should respond with an array - get - all games', async() => {
         const response = await supertest(router)
         .get('/api/games');
-        console.log(response)
         expect(Array.isArray(response.body)).toBe(true);
     })
 
-    it('respond with 201 - post - add game', async () => {
+    it('should respond with 201 - post - add game', async () => {
         const response = await supertest(router)
         .post('/api/games')
         .send({title: 'testgame333', genre: 'testgenr3e'})
-        console.log(response.body)
         expect(response.status).toBe(201)
     })
 
-    it('respond with json object - post - add game', async () => {
+    it('should respond with json object - post - add game', async () => {
          await supertest(router)
             .post('/api/games')
             .send({title: 'testgame2', genre: 'testgenre'})
@@ -45,6 +43,32 @@ describe('router', () => {
             .post('/api/games')
             .send({title: 'testgame123'})
             .expect(422)
-        })
+    })
+    it('should respond with 405 - post - add game w/ title already existed', async() => {
+        await supertest(router)
+            .post('/api/games')
+            .send({title: 'testgame333', genre: 'testgenre'})
+            .expect(405)
+    })
+    it('should respond with 200 - get - get game by id', async () => {
+        await supertest(router)
+            .get('/api/games/1')
+            .expect(200)
+    })
+    it('should respond with 404 - get - get game by invalid id', async() => {
+        await supertest(router)
+            .get('/api/games/888')
+            .expect(404)
+    })
+    it('should repond with 200 - delete - delete by id', async() => {
+        await supertest(router)
+            .delete('/api/games/1')
+            .expect(200)
+    })
+    it('should respond with 404 - delete - delete game by invalid id', async() => {
+        await supertest(router)
+            .delete('/api/games/888')
+            .expect(404)
+    })
 })
 
