@@ -7,6 +7,9 @@
 		"test": "cross-env DB_ENV=testing jest --watch --verbose",
 		"start": "nodemon index.js"
 	},
+	"jest": {
+		"testEnvirnoment": "node"
+	  },
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/LambdaSchool/Sprint-Challenge--Testing.git"
@@ -20,6 +23,7 @@
 	"homepage": "https://github.com/LambdaSchool/Sprint-Challenge--Testing#readme",
 	"dependencies": {
 		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.19.0",
 		"dotenv": "^8.0.0",
 		"express": "^4.17.1",
 		"knex": "^0.17.6",
